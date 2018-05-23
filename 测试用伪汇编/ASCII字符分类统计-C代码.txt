@@ -1,0 +1,145 @@
+int main()
+{
+	clearRAM();
+	while(1){
+		RAMtoDigit();
+		while(1){
+			delay();
+			lastkey = key;
+			key = getnewkey();
+			if(key!=0 && key!=lastkey){
+				getSwitch();
+				switch(switches){
+					case xxx:
+					case xxx:
+					case xxx:
+					case xxx:
+				}
+				writeRAM();
+			}
+		}
+	}
+}
+
+SW 0 0 1000   //reset
+SW 0 0 1004
+LB 8 0 1004   //digit show
+LB 9 0 1005
+LB 10 0 1006
+LB 11 0 1007
+SB 8 0 FF03
+SB 9 0 FF04
+SB 10 0 FF05
+SB 11 0 FF06  //end
+LB 8 0 FF02   //key dealing
+JAL DELAY
+ADD 9 8 0
+LB 8 0 FF02   
+BEQ 9 8 FFFC
+BEQ 8 0 FFFB  //end
+LB 10 0 FF00  //categorize
+SLTI 11 10 0030
+BNE 11 0 000A
+SLTI 11 10 003A
+BNE 11 0 000D
+SLTI 11 10 0041
+BNE 11 0 0006
+SLTI 11 10 005B
+BNE 11 0 000E
+SLTI 11 10 0061
+BNE 11 0 0002
+SLTI 11 10 007A
+BNE 11 0 000F
+LB 12 0 1000          //SIGN
+ADDI 12 12 0001
+SB 12 0 1000
+ADDI 13 0 0000
+J 0030
+LB 12 0 1001          //NUMB
+ADDI 12 12 0001
+SB 12 0 1001
+ADDI 13 0 0001
+J 0030
+LB 12 0 1002          //CPLT
+ADDI 12 12 0001
+SB 12 0 1002
+ADDI 13 0 0002
+J 0030
+LB 12 0 1003          //LWLT
+ADDI 12 12 0001
+SB 12 0 1003
+ADDI 13 0 0003
+ADD 16 12 0           //SEND
+JAL TSLT
+SB 2 13 1004
+J  0002
+ADDI 16 0 08FF        //DELAY
+ADDI 17 0 0
+SLT 18 17 16
+ADDI 17 17 0001
+BNE 18 0 FFFD
+JR 31
+SLTI  16   4   0001   //TSLT
+BNE   16   0   001E
+SLTI  16   4   0002
+BNE   16   0   001E
+SLTI  16   4   0003
+BNE   16   0   001E
+SLTI  16   4   0004
+BNE   16   0   001E
+SLTI  16   4   0005
+BNE   16   0   001E
+SLTI  16   4   0006
+BNE   16   0   001E
+SLTI  16   4   0007
+BNE   16   0   001E
+SLTI  16   4   0008
+BNE   16   0   001E
+SLTI  16   4   0009
+BNE   16   0   001E
+SLTI  16   4   000A
+BNE   16   0   001E
+SLTI  16   4   000B
+BNE   16   0   001E
+SLTI  16   4   000C
+BNE   16   0   001E
+SLTI  16   4   000D
+BNE   16   0   001E
+SLTI  16   4   000E
+BNE   16   0   001E
+SLTI  16   4   000F
+BNE   16   0   001E
+SLTI  16   4   0010
+BNE   16   0   001E
+ADDI  2    0   003F
+J     0079
+ADDI  2    0   0006
+J     0079
+ADDI  2    0   005B
+J     0079
+ADDI  2    0   004F
+J     0079
+ADDI  2    0   0066
+J     0079
+ADDI  2    0   006D
+J     0079
+ADDI  2    0   007D
+J     0079
+ADDI  2    0   0007
+J     0079
+ADDI  2    0   007F
+J     0079
+ADDI  2    0   006F
+J     0079
+ADDI  2    0   0077
+J     0079
+ADDI  2    0   007C
+J     0079
+ADDI  2    0   0039
+J     0079
+ADDI  2    0   005E
+J     0079
+ADDI  2    0   0079
+J     0079
+ADDI  2    0   0071
+JR    31
